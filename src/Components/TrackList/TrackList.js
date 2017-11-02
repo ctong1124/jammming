@@ -9,10 +9,10 @@ class TrackList extends React.Component {
   }
 
   // create Track components from TrackList
-  createTracks(tracks) {
+  createTracks(tracks, onAddFromParent) {
     if(tracks) {
       return tracks.map(function(track) {
-        return <Track track={track}/>
+        return <Track track={track} onAdd={onAddFromParent}/>
       });
     }
   }
@@ -21,7 +21,7 @@ class TrackList extends React.Component {
   render() {
     return(
       <div className="TrackList">
-        {this.createTracks(this.props.tracks)}
+        {this.createTracks(this.props.tracks, this.props.onAdd)}
       </div>
     );
   }
