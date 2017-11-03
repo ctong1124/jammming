@@ -9,7 +9,6 @@ class Track extends React.Component {
   }
 
   renderAction() {
-    console.log(this.props.isRemoval);
     if(this.props.isRemoval) {
       return <a className="Track-action"> - </a>;
     }

@@ -8,7 +8,6 @@ import Playlist from '../Playlist/Playlist.js';
 class App extends Component {
   constructor(props) {
     super(props);
-    this.addTrack = this.addTrack.bind(this);
     this.state = {
       // search: de
       searchResults: [
@@ -53,6 +52,7 @@ class App extends Component {
         }
       ]
     };
+    this.addTrack = this.addTrack.bind(this);
   }
 
   addTrack(track) {
@@ -61,20 +61,21 @@ class App extends Component {
     //array of objects
     let playlist = this.state.playlistTracks;
     let i = 0;
-    while(!inPlaylist) {
+    while(!inPlaylist && i<playlist.length) {
       if(track.id === playlist[i].id) {
         inPlaylist = true;
       }
       i++;
     }
-
     //if track isn't in playlist, add to playlist
     if(!inPlaylist) {
       this.setState({
-        id: track.name,
-        name: track.name,
-        artist: track.artist,
-        album: track.album
+        playlistTracks: this.state.playlistTracks.concat([{
+          id: track.name,
+          name: track.name,
+          artist: track.artist,
+          album: track.album
+        }])
       });
     }
   }
