@@ -30,7 +30,7 @@ class App extends Component {
           album: 'Deep In the Iris'
         }
       ],
-      playlistName: 'icryabit',
+      playlistName: 'test',
       playlistTracks: [
         {
           id: 'Twilight',
@@ -53,6 +53,8 @@ class App extends Component {
       ]
     };
     this.addTrack = this.addTrack.bind(this);
+    this.removeTrack = this.removeTrack.bind(this);
+    this.updatePlaylistName = this.updatePlaylistName.bind(this);
   }
 
   addTrack(track) {
@@ -80,6 +82,22 @@ class App extends Component {
     }
   }
 
+  removeTrack(track) {
+    let newPlaylist = this.state.playlistTracks.filter(function(obj){
+      return obj.id !== track.id;
+    });
+
+    this.setState({
+      playlistTracks: newPlaylist
+    });
+  }
+
+  updatePlaylistName(name){
+    this.setState({
+      playlistName: name
+    })
+  }
+
   render() {
     return (
       <div>
@@ -88,7 +106,8 @@ class App extends Component {
           <SearchBar />
           <div className="App-playlist">
             <SearchResults searchResults={this.state.searchResults} onAdd={this.addTrack}/>
-            <Playlist playlistName={this.state.playlistName} playlistTracks={this.state.playlistTracks}/>
+            <Playlist playlistName={this.state.playlistName} playlistTracks={this.state.playlistTracks} onRemove={this.removeTrack} onNameChange={this.updatePlaylistName}/>
+            {console.log(this.state)};
           </div>
         </div>
       </div>

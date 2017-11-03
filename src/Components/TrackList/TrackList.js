@@ -10,7 +10,7 @@ class TrackList extends React.Component {
 
   // create Track components from TrackList
   //tracks is an array
-  createTracks(tracks, onAddFromParent, isRemovalFromParent) {
+  createTracks(tracks, onAddFromParent, isRemovalFromParent, onRemoveFromParent) {
     if(tracks) {
       // let boo = [];
       // for(let i=0; i<tracks.length;i++) {
@@ -20,7 +20,7 @@ class TrackList extends React.Component {
       // console.log(jsx);
       // return jsx;
       return tracks.map(function(track) {
-        return <Track track={track} onAdd={onAddFromParent} isRemoval={isRemovalFromParent} />
+        return <Track track={track} onAdd={onAddFromParent} isRemoval={isRemovalFromParent} onRemove={onRemoveFromParent} />
       });
     }
   }
@@ -29,7 +29,7 @@ class TrackList extends React.Component {
   render() {
     return(
       <div className="TrackList">
-        {this.createTracks(this.props.tracks, this.props.onAdd, this.props.isRemoval)}
+        {this.createTracks(this.props.tracks, this.props.onAdd, this.props.isRemoval, this.props.onRemove)}
       </div>
     );
   }
