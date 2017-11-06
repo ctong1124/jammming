@@ -21,6 +21,7 @@ class App extends Component {
     this.savePlaylist = this.savePlaylist.bind(this);
   }
 
+  // Add track from Search Results to Playlist
   addTrack(track) {
     //first checking if track exists in playlist
     let inPlaylist = false;
@@ -47,6 +48,7 @@ class App extends Component {
     }
   }
 
+  //Remove track from Playlist
   removeTrack(track) {
     let newPlaylist = this.state.playlistTracks.filter(function(obj){
       return obj.id !== track.id;
@@ -57,24 +59,30 @@ class App extends Component {
     });
   }
 
+  // Update Playlist name in app state
   updatePlaylistName(name){
     this.setState({
       playlistName: name
     })
   }
 
+  // Save playlist to Spotify
   savePlaylist() {
     let trackURIs = this.state.playlistTracks.map(function(track){
       return track.uri;
     });
+    // sends to function dealing with Spotify API
     Spotify.savePlaylist(this.state.playlistName, trackURIs);
+
+    // clear state
     this.setState({
-    playlistName: 'New Playlist',
-    searchResults: [],
-    playlistTracks: []
-  });
+      playlistName: 'New Playlist',
+      searchResults: [],
+      playlistTracks: []
+    });
   }
 
+  // sends to function dealing with Spotify API
   search(term) {
     Spotify.search(term).then(newSearchResults => {
       this.setState({

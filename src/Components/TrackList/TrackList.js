@@ -1,15 +1,14 @@
 import React from 'react';
-// import ReactDOM from 'react-dom';
 import './TrackList.css';
 import Track from '../Track/Track.js';
 
 class TrackList extends React.Component {
-  // constructor(props) {
-  //   super(props);
-  // }
 
   // create Track components from TrackList
-  //tracks is an array
+  // tracks is an array
+  // I know I could have done this within the render method but I was getting a strange
+  // error on this.props.tracks.map where it was saying it could run map on undefined.
+  // Hence, the if(tracks)
   createTracks(tracks, onAddFromParent, isRemovalFromParent, onRemoveFromParent) {
     if(tracks) {
       let i = 0;
